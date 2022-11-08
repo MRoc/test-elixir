@@ -45,7 +45,7 @@ IO.puts hello1.("Elixir")
 hello2 = fn -> "Hello Elixir" end
 IO.puts hello2.()
 
-IO.puts "is_function fn (p) -> 123 end: #{is_function fn (p) -> 123 end}"
+IO.puts "is_function fn -> 123 end: #{is_function fn -> 123 end}"
 
 # Typle (immutable indexed array)
 t0 = { 1, 2, 3 }
@@ -60,6 +60,10 @@ IO.write "hd list: "
 IO.inspect hd list
 IO.write "tl list: "
 IO.inspect tl list
+IO.write "Enum.at(list, 2): "
+IO.inspect Enum.at(list, 2)
+IO.write "Enum.max_by(list, fn p -> p end): "
+IO.inspect Enum.max_by(list, fn p -> p end)
 
 IO.write "Prepend list: "
 list = [0 | list]
@@ -90,7 +94,6 @@ IO.puts "Destructuring tuple:"
 IO.puts a
 IO.puts b
 
-
 IO.puts "Destructuring array:"
 list = [1, 2, 3]
 [a | b] = list
@@ -98,7 +101,7 @@ IO.inspect a
 IO.inspect b
 
 # Read file
-{status, fid} = File.open("test.txt")
+{status, fid} = File.open("./test.txt")
 IO.puts status
 IO.puts IO.read fid, :line
 File.close fid
