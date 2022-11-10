@@ -35,6 +35,7 @@ is_binary 'hello'
 is_function 'hello'
 
 # Tuple (immutable indexed array)
+{ 1, 2, 3 }
 elem({ 1, 2, 3 }, 0)
 elem({ 1, 2, 3 }, 1)
 elem({ 1, 2, 3 }, 2)
@@ -65,7 +66,10 @@ Map.keys %{:a => 1, :b => 2}
 %{:a => 1}.a
 %{} = %{a: 1, b: 2}
 %{b: 2} = %{a: 1, b: 2}
-Map.get(%{:a => 1}, :a)
+Map.get(%{a: 1}, :a)
+Map.to_list(%{a: 1, b: 2})
+%{%{a: 1, b: 2} | b: 3}
+
 
 # Destruction / pattern matching
 {a, b} = {1, 2}

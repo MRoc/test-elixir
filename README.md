@@ -7,6 +7,21 @@
 
 ```
 sudo apt-get install elixir
+
 cd ./basics
 elixir ./basics.exs
+
+cd ./modules
+elixir ./modules.exs
+```
+
+
+```
+iex
+h String.<TAB>
+```
+
+
+```
+elixirc ./modules.exs
 ```
