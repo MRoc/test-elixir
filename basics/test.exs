@@ -81,3 +81,4 @@ if true, do: :this, else: :that
 
 # Pipe operator
 [1, 2] |> Enum.map(&("H: #{&1}"))
+"Hello" |> String.upcase |> String.reverse
