@@ -1,34 +1,10 @@
-# Anonymous function
-hello0 = fn (p) -> "Hello #{p}" end
-IO.puts hello0.("Elixir")
-
-hello1 = fn p -> "Hello #{p}" end
-IO.puts hello1.("Elixir")
-
-hello2 = fn -> "Hello Elixir" end
-IO.puts hello2.()
-
-IO.puts "is_function fn -> 123 end: #{is_function fn -> 123 end}"
-
-# Pattern matching
-IO.puts "x = 3"
-x = 3
-IO.puts "y = 2"
-y = 2
-IO.puts "^x = y + 1   :#{^x = y + 1}"
-
-bingo = fn
-  (88) -> "Bingo!"
-  (_) -> "no win"
-end
-IO.puts bingo.(9)
-IO.puts bingo.(88)
-
-# Pipe operator
-IO.write "[1, 2] |> Enum.map(&(\"H: \#\{&1\}\")): "
-IO.inspect [1, 2] |> Enum.map(&("H: #{&1}"))
-
-defmodule Helper do
+defmodule Program do
+  def main do
+    {:ok, contents} = File.read("./test.exs")
+    lines = contents |> String.split("\n", trim: true)
+    lines = Program.execute(lines)
+    IO.puts Program.concat(lines)
+  end
   def execute(lines) do
     Enum.map lines, fn (code) ->
       {result, _} = Code.eval_string code
@@ -40,6 +16,4 @@ defmodule Helper do
   end
 end
 
-{:ok, contents} = File.read("./test.exs")
-lines = Helper.execute(contents |> String.split("\n", trim: true))
-IO.puts Helper.concat(lines)
+Program.main()

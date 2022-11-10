@@ -34,7 +34,7 @@ is_list 'hello'
 is_binary 'hello'
 is_function 'hello'
 
-# Typle (immutable indexed array)
+# Tuple (immutable indexed array)
 elem({ 1, 2, 3 }, 0)
 elem({ 1, 2, 3 }, 1)
 elem({ 1, 2, 3 }, 2)
@@ -50,11 +50,30 @@ List.first [1, "two", :three]
 [1 | [2 | [3]]]
 length [1, 2, 3]
 
-# Keyword list
+# Keyword list (orderd, slow to look-up as underlying list)
 [{:a, 1}, {:b, 2}]
 [a: 1, b: 2]
 Keyword.get([a: 1, b: 2], :b)
 
-# Destruction
+# Map (no order, fast to look-up)
+%{:a => 1, :b => 2}
+%{a: 1, b: 2}
+%{"a" => 1, "b" => 2}
+Map.keys %{:a => 1, :b => 2}
+%{:a => 1}[:a]
+%{:a => 1}[:z]
+%{:a => 1}.a
+%{} = %{a: 1, b: 2}
+%{b: 2} = %{a: 1, b: 2}
+Map.get(%{:a => 1}, :a)
+
+# Destruction / pattern matching
 {a, b} = {1, 2}
 [a | b] = [1, 2, 3]
+
+# If-statement (with keyword list)
+if(true, [do: :this, else: :that])
+if true, do: :this, else: :that
+
+# Pipe operator
+[1, 2] |> Enum.map(&("H: #{&1}"))
